@@ -19,8 +19,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
-@Controller
-@RequestMapping("/api")
+@RestController
+@RequestMapping("/")
 public class HotelReservationController {
 
     private final UserService userService;
