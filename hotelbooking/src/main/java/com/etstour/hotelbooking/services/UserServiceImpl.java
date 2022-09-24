@@ -24,9 +24,9 @@ public class UserServiceImpl implements UserService {
     //service pattern to manage transactions
     //and handle services for user between server and client
 
-    private static UserRepository userRepository;
+    private final UserRepository userRepository;
 
-    private static RoleRepository roleRepository;
+    private final RoleRepository roleRepository;
 
     public UserServiceImpl(UserRepository userRepository, RoleRepository roleRepository) {
         this.userRepository = userRepository;
