@@ -19,8 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
-@RestController
-@RequestMapping("/")
+@Controller
 public class HotelReservationController {
 
     private final UserService userService;
@@ -39,7 +38,7 @@ public class HotelReservationController {
         dataBinder.registerCustomEditor(String.class, stringTrimmerEditor);
     }
 
-    @GetMapping("/")
+    @RequestMapping("/")
     public String homePage(){
         return "home-page";
     }
