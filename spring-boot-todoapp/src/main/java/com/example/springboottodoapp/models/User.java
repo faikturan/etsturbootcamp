@@ -15,7 +15,7 @@ import java.util.List;
 @Builder
 @Getter
 @Setter
-@Table(name = "user", uniqueConstraints = @UniqueConstraint(columnNames = "email"))
+@Table(name = "users", uniqueConstraints = @UniqueConstraint(columnNames = "email"))
 public class User {
 
     @Id
