@@ -166,4 +166,32 @@ public class AccountService {
         });
     }
 
+    @RabbitListener(queues = "thirdStepQueue")
+    public void finalizeTransfer(MoneyTransferRequest transferRequest){
+        Optional<Account> accountOptional = accountRepository.findById(transferRequest.getFromId());
+        accountOptional.ifPresentOrElse(account -> {
+            String notificationMessage =
+                    "Dear customer %s \n Your money transfer request " +
+                            "has been succeed. " +
+                            "Your new balance is %s";
+            String senderMessage =
+                    String.format(notificationMessage, account.getId(), account.getBalance());
+            kafkaTemplate.send("transfer-notification", senderMessage);
+        }, () -> System.out.println("Account not found"));
+
+        Optional<Account> accountToOptinal =
+                accountRepository.findById(transferRequest.getToId());
+        accountToOptinal.ifPresentOrElse(account -> {
+            String notificationMessage =
+                    "Dear customer %s \n You received a money transfer from %s. " +
+                            "Your new balance is %s";
+            System.out.println("Receiver(" +account.getId() +") new account balance: " +account.getBalance());
+            String receiverMessage =
+                    String.format(notificationMessage, account.getId(), account.getBalance());
+            kafkaTemplate.send("transfer-notification", receiverMessage);
+        }, () -> System.out.println("Account not found"));
+
+
+    }
+
 }
