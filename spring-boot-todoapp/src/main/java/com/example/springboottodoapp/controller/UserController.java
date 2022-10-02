@@ -35,6 +35,14 @@ public class UserController {
         userRepository.save(user);
     }
 
+    @GetMapping("{userId}/todos/{todoItemId}")
+    public void getTodo(@PathVariable Long userId, @PathVariable Long todoItemId){
+        User user = userRepository.findById(userId).orElseThrow(()->new NoSuchElementException());
+        TodoItem todoItem = todoItemRepository.findById(todoItemId).orElseThrow(()->new NoSuchElementException());
+        user.getTodoItems().add(todoItem);
+        todoItemRepository.findById(todoItemId);
+    }
+
 
     @PostMapping("todos/{todoItemId}")
     public void toggleTodoItemCompleted(@PathVariable Long todoItemId){
