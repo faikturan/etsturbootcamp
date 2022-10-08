@@ -7,6 +7,7 @@ import com.example.bankapp.model.*;
 import com.example.bankapp.repository.AccountRepository;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -30,7 +31,7 @@ class AccountServiceTest {
     private AmqpTemplate rabbitTemplate;
     private  KafkaTemplate kafkaTemplate;
 
-    @Before
+    @BeforeEach
     void setUp() throws Exception {
 
         accountRepository = Mockito.mock(AccountRepository.class);
@@ -67,8 +68,69 @@ class AccountServiceTest {
 
     }
 
+    @Test
+    public void whenCreateAccountCalledWithNonExistCustomer_itShouldThrowRuntimeException(){
+        CreateAccountRequest createAccountRequest = new CreateAccountRequest("1234");
+        createAccountRequest.setCustomerId("12345");
+        createAccountRequest.setBalance(100.0);
+        createAccountRequest.setCity(City.ISTANBUL);
+        createAccountRequest.setCurrency(Currency.TL);
+
+        //Determine mock services behavior test senario
+        Mockito.when(customerService.getCustomerById("12345")).thenReturn(Customer.builder().build());
+
+        AccountDto expectedAccountDto = AccountDto.builder().build();
+
+        AccountDto result = accountService.createAccount(createAccountRequest);
+
+        //Check results and verify the mock methods are called
+        Assert.assertEquals(result, expectedAccountDto );
+        Mockito.verifyNoInteractions(accountRepository);
+        Mockito.verifyNoInteractions(accountDtoConverter);
+
+    }
+
+    @Test
+    public void whenCreateAccountCalledAndRepositoryThrewException_itShouldThrowException(){
+        CreateAccountRequest createAccountRequest = new CreateAccountRequest("1234");
+        createAccountRequest.setCustomerId("12345");
+        createAccountRequest.setBalance(100.0);
+        createAccountRequest.setCity(City.ISTANBUL);
+        createAccountRequest.setCurrency(Currency.TL);
+
+        Customer customer = Customer.builder()
+                .id("12345")
+                .address(Address.builder().city(City.ISTANBUL).postcode("456312")
+                        .addressDetails("bu bir adrestir.").build())
+                .city(City.ISTANBUL)
+                .dateOfBirth(1988)
+                .name("Sibel")
+                .build();
+
+        Account account = Account.builder()
+                .id(createAccountRequest.getId())
+                .balance(createAccountRequest.getBalance())
+                .currency(createAccountRequest.getCurrency())
+                .customerId(createAccountRequest.getCustomerId())
+                .city(createAccountRequest.getCity())
+                .build();
+
+        //Determine mock services behavior test senario
+        Mockito.when(customerService.getCustomerById("12345")).thenReturn(customer);
+        Mockito.when(accountRepository.save(account)).thenThrow(new RuntimeException("bla bla bla"));
+
+        //accountService.createAccount(createAccountRequest);
+         assertThrows(RuntimeException.class, ()-> accountService.createAccount(createAccountRequest));
+
+        Mockito.verify(customerService).getCustomerById("12345");
+        Mockito.verify(accountRepository).save(account);
+        Mockito.verifyNoInteractions(accountDtoConverter);
+
+    }
+
+
     private CreateAccountRequest generateAccountRequest(){
-        CreateAccountRequest createAccountRequest = new CreateAccountRequest("12345");
+        CreateAccountRequest createAccountRequest = new CreateAccountRequest("1234");
         createAccountRequest.setCustomerId("12345");
         createAccountRequest.setBalance(100.0);
         createAccountRequest.setCity(City.ISTANBUL);
