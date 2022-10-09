@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="fragments/bootstrap::head">
+</head>
+<body>
+
+<div class="container">
+    <div th:replace="fragments/menu::top"></div>
+    <h1>Users Admin</h1>
+    <a href="/users/add" class="btn btn-warning mb-3">add</a>
+    <div class="row">
+        <div class="col-6">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <!--/*@thymesVar id="users" type=""*/-->
+                <tr th:each="user: ${users}">
+                    <td th:text="${user.id}">id</td>
+                    <td th:text="${user.name}">name</td>
+                    <td><button type="button" class="btn btn-primary"
+                                th:onclick=" | showUserDetail(${user.id}) |">view</button></td>
+                </tr>
+                </tbody>
+
+            </table>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
