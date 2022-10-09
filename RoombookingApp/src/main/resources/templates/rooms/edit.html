@@ -6,8 +6,8 @@
 
 <div class="container">
     <div th:replace="fragments/menu::top"></div>
-    <h1><span th:if="${room.id} == null">Add</span>
-    <span th:if="${room.id} != null">Edit</span> Room</h1>
+    <h1><span th:if="${room.id == null}">Add</span>
+    <span th:if="${room.id != null}">Edit</span> Room</h1>
 
     <div th:if="${message}" class="bg-warning p-5" th:text="|Something went wrong : ${message}|"></div>
 
@@ -27,7 +27,6 @@
         <h2>This room can accomodate:</h2>
         <div class="form-group" th:each="layoutCapacity, itemStat: *{capacities}">
             <label for="layout" th:text="${layoutCapacity.layout.description}">layout</label>
-            <!--/*@thymesVar id="capacity" type=""*/-->
             <input type="text" class="form-control" id="layoutCapacity"
                    th:field="*{capacities[__${itemStat.index}__].capacity}">
             <input type="text" class="form-control" id="layout"

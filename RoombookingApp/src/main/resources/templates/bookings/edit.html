@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/bootstrap::head">
+</head>
+<body>
+<div class="container">
+    <div th:replace="fragments/menu::top"></div>
+    <h1><span th:if="${booking.id == null}">Add</span>
+    <span th:if="${booking.id != null}">Edit</span></h1>
+
+    <form method="post" th:object="${booking}" th:action="@{/bookings/save}">
+        <input type="hidden" th:field="*{id}" />
+
+        <div class="row">
+            <div class="form-group col-4">
+                <label for="date">Date</label>
+                <input type="date" class="form-control" id="date" th:field="*{date}">
+            </div>
+
+            <div class="form-group col-4">
+                <label for="startTime">Start time</label>
+                <input type="time" class="form-control" id="startTime" th:field="*{startTime}">
+            </div>
+
+            <div class="form-group col-4">
+                <label for="endTime">End time</label>
+                <input type="time" class="form-control" id="endTime" th:field="*{endTime}">
+            </div>
+
+        </div>
+
+        <div class="row">
+            <div class="form-group col-5">
+            <label for="room">Room</label>
+            <select class="form-control" id="room" th:field="*{room}">
+                <option th:each="room: ${rooms}" th:value="${room.id}"
+                th:text="${room.name}">room</option>
+            </select>
+            </div>
+
+            <div class="form-group col-5">
+                <label for="layout">Layout</label>
+                <select class="form-control" id="layout" th:field="*{layout}">
+                    <option th:each="layout: ${layouts}" th:value="${layout}"
+                            th:text="${layout.description}">layout</option>
+                </select>
+            </div>
+
+            <div class="form-group col-2">
+                <label for="participants">Participants</label>
+                <input type="number" class="form-control" id="participants" th:field="*{participants}">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="form-group col-6">
+                <label for="room">User</label>
+                <select class="form-control" id="user" th:field="*{user}">
+                    <option th:each="user: ${users}" th:value="${user.id}"
+                            th:text="${user.name}">user</option>
+                </select>
+            </div>
+
+            <div class="form-group col-6">
+                <label for="title">Meeting title</label>
+                <input type="text" class="form-control" id="title" th:field="*{title}">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <button type="submit" class="btn btn-primary">Save</button>
+            </div>
+        </div>
+
+
+
+    </form>
+</div>
+
+</body>
+</html>

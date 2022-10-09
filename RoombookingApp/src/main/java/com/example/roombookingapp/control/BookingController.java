@@ -57,7 +57,7 @@ public class BookingController {
         return "redirect:/";
     }
 
-    @DeleteMapping("/delete")
+    @RequestMapping("/delete")
     public String delete(@RequestParam Long id){
         bookingRepository.deleteById(id);
         return "redirect:/";

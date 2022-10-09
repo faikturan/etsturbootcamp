@@ -43,8 +43,8 @@
                     <p class="mb-0">Participants : <span th:text="${booking.participants}">participants</span></p>
                 </div>
                 <div class="col-6">
-                   <a href="@{/bookings/edit(id=${booking.id})}" class="btn btn-warning">Amend</a>
-                    <a href="@{/bookings/delete(id=${booking.id})}" class="btn btn-danger">Cancel</a>
+                   <a th:href="@{/bookings/edit(id=${booking.id})}" class="btn btn-warning">Amend</a>
+                    <a th:href="@{/bookings/delete(id=${booking.id})}" class="btn btn-danger">Cancel</a>
                 </div>
             </div>
         </div>

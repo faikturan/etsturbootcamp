@@ -32,7 +32,7 @@ public class RoomController {
     public ModelAndView addRoom(){
         Map<String, Object> model = new HashMap<>();
         model.put("room", new Room("", ""));
-        return new ModelAndView("rooms/add", model);
+        return new ModelAndView("rooms/edit", model);
     }
 
 
