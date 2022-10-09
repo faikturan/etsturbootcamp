@@ -14,7 +14,7 @@
 
     <a href="/bookings/new" class="btn btn-primary mt-3 mb-5">New Booking</a>
 
-    <h3 class="mt-5" th:if="${booking.size() == 0}">
+    <h3 class="mt-5" th:if="${bookings.size() == 0}">
         There are no meetings currently scheduled for this date.
     </h3>
 
@@ -36,11 +36,20 @@
                 <li class="list list-inline-item"><i class="fa fa-location-arrow" aria-hidden="true"></i>
                     <span th:text="${booking.room.name}">room</span></li>
             </ul>
-
+            <div class="row">
+                <div class="col-6">
+                    <p class="mb-0">Booked by : <span th:text="${booking.user.name}">user</span></p>
+                    <p class="mb-0">Room layout : <span th:text="${booking.layout.description}">layout</span></p>
+                    <p class="mb-0">Participants : <span th:text="${booking.participants}">participants</span></p>
+                </div>
+                <div class="col-6">
+                   <a href="@{/bookings/edit(id=${booking.id})}" class="btn btn-warning">Amend</a>
+                    <a href="@{/bookings/delete(id=${booking.id})}" class="btn btn-danger">Cancel</a>
+                </div>
+            </div>
         </div>
 
     </div>
-
 
 </div>
 

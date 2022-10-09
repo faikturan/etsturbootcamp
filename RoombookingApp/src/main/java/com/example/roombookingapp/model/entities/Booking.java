@@ -113,4 +113,17 @@ public class Booking {
     public void setParticipants(Integer participants) {
         this.participants = participants;
     }
+
+    public Integer getDisplayDay(){
+        return this.date.toLocalDate().getDayOfMonth();
+    }
+
+    public String getDisplayMonth(){
+        return this.date.toLocalDate().getMonth().toString();
+    }
+
+    public String getDisplayDayOfWeek(){
+        return this.date.toLocalDate().getDayOfWeek().toString();
+    }
+
 }

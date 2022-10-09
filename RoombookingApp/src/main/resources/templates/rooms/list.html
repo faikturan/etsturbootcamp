@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/bootstrap::head">
+</head>
+<body>
+
+<div class="container">
+    <div th:replace="fragments/menu::top"></div>
+    <h1>Rooms Admin</h1>
+    <a href="/rooms/add" class="btn btn-warning mb-3">add</a>
+    <div class="row">
+        <div class="col-6">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="room: ${rooms}">
+                    <td th:text="${room.id}">id</td>
+                    <td th:text="${room.name}">name</td>
+                    <td><button type="button" class="btn btn-primary"
+                    th:onclick="|showRoomDetails(${room.id})|">view</button></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-6">
+            <div th:each="room: ${rooms}" th:id="|room-${room.id}|" style="..." class="roomDetails">
+                <h2>Room details</h2>
+                <a th:href="@{/rooms/edit(roomId=${room.id})}" class="btn btn-small btn-warning">edit</a>
+                <a th:href="@{/rooms/delete(roomId=${room.id})}" class="btn btn-small btn-warning">delete</a>
+
+            <table>
+                <tr>
+                    <td>id</td><td th:text="${room.id}">id</td>
+                </tr>
+
+                <tr>
+                    <td>name</td><td th:text="${room.name}">name</td>
+                </tr>
+
+                <tr>
+                    <td>location</td><td th:text="${room.location}">location</td>
+                </tr>
+            </table>
+            <h4>This room can accomodate:</h4>
+            <table>
+                <tr th:each="layoutCapacity: ${room.capacities}">
+                    <td></td> <td th:text="${layoutCapacity.layout.description}">layout</td>
+                    <td th:text="${layoutCapacity.capacity}">capacity</td>
+                </tr>
+            </table>
+        </div>
+        </div>
+    </div>
+
+    <script>
+        function showRoomDetails(id){
+            $(".roomDetails").hide();
+            $("#room-"+id).show();
+        }
+    </script>
+</div>
+</body>
+</html>

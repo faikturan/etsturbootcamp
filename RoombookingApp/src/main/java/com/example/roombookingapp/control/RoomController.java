@@ -38,7 +38,7 @@ public class RoomController {
 
     @RequestMapping("/edit")
     public ModelAndView editRoom(@RequestParam Long roomId){
-        Optional<Room> room = roomRepository.findById(roomId);
+        Room room = roomRepository.findById(roomId).get();
         Map<String, Object> model = new HashMap<>();
         model.put("room", room);
         return new ModelAndView("rooms/edit", model);
