@@ -2,13 +2,11 @@ package com.example.roombookingapp.model.entities;
 
 
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 
 @Entity
+@Table(name = "users")
 public class User {
 
     @Id
