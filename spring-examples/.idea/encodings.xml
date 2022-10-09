@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/spring-boot01-mongo-rest-api/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/spring-boot01-mongo-rest-api/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/spring-boot02-elasticsearch/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/spring-boot02-elasticsearch/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/spring-boot03-datajpa-postgresql/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/spring-boot03-datajpa-postgresql/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/spring-boot04-api-doc-swagger2/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/spring-boot04-api-doc-swagger2/src/main/resources" charset="UTF-8" />
+  </component>
+</project>

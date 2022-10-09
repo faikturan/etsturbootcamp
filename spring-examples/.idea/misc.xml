@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="MavenProjectsManager">
+    <option name="originalFiles">
+      <list>
+        <option value="$PROJECT_DIR$/spring-boot02-elasticsearch/pom.xml" />
+        <option value="$PROJECT_DIR$/spring-boot01-mongo-rest-api/pom.xml" />
+        <option value="$PROJECT_DIR$/spring-boot04-api-doc-swagger2/pom.xml" />
+        <option value="$PROJECT_DIR$/spring-boot03-datajpa-postgresql/pom.xml" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_16" default="true" project-jdk-name="16" project-jdk-type="JavaSDK" />
+</project>

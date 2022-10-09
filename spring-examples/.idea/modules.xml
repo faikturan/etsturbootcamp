@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/spring-boot01-mongo-rest-api/spring-boot01-mongo-rest-api.iml" filepath="$PROJECT_DIR$/spring-boot01-mongo-rest-api/spring-boot01-mongo-rest-api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/spring-boot02-elasticsearch/spring-boot02-elasticsearch.iml" filepath="$PROJECT_DIR$/spring-boot02-elasticsearch/spring-boot02-elasticsearch.iml" />
+      <module fileurl="file://$PROJECT_DIR$/spring-boot03-datajpa-postgresql/spring-boot03-datajpa-postgresql.iml" filepath="$PROJECT_DIR$/spring-boot03-datajpa-postgresql/spring-boot03-datajpa-postgresql.iml" />
+      <module fileurl="file://$PROJECT_DIR$/spring-boot04-api-doc-swagger2/spring-boot04-api-doc-swagger2.iml" filepath="$PROJECT_DIR$/spring-boot04-api-doc-swagger2/spring-boot04-api-doc-swagger2.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/spring-examples.iml" filepath="$PROJECT_DIR$/.idea/spring-examples.iml" />
+    </modules>
+  </component>
+</project>
