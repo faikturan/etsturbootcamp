@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="fragments/bootstrap::head">
 </head>
 <body>
@@ -27,10 +27,36 @@
                                 th:onclick=" | showUserDetail(${user.id}) |">view</button></td>
                 </tr>
                 </tbody>
-
             </table>
         </div>
+
+        <div class="col-6">
+            <div th:each="user : ${users}" th:id=" | user-${user.id} |" style="..." class="userDetails">
+                <h2>User details</h2>
+                <a href="@{/users/edit(userId=${user.id})}" class="btn btn-small btn-warning">edit</a>
+                <a href="@{/users/delete(userId=${user.id})}" class="btn btn-small btn-warning">delete</a>
+                <table>
+                    <tr>
+                        <td>id</td><td th:text="${user.id}">id</td>
+                    </tr>
+                    <tr>
+                        <td>name</td><td th:text="${user.name}">name</td>
+                    </tr>
+                    <tr>
+                        <td>Password</td><td><a href="@{/users/resetPW(userId=${user.id})}"
+                    class="btn btn-small btn-warning">reset</a></td>
+                    </tr>
+
+                </table>
+            </div>
+        </div>
     </div>
+    <script>
+        function showUserDetail(id){
+            $(".userDetails").hide();
+            $("#user-"+id).show();
+        }
+    </script>
 </div>
 
 </body>

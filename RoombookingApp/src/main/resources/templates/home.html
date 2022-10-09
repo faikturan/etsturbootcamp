@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/bootstrap::head">
+</head>
+<body>
+<div class="container">
+    <div th:replace="fragments/menu::top"></div>
+    <h1>Room Booking System</h1>
+
+    <form action="/calender" method="get" th:object="${dateRequest}">
+        <h2>The following meetings are taking place on: <input type="date"
+        th:field="*{date}" onchange="this.form.submit();" /></h2>
+    </form>
+
+    <a href="/bookings/new" class="btn btn-primary mt-3 mb-5">New Booking</a>
+
+    <h3 class="mt-5" th:if="${booking.size() == 0}">
+        There are no meetings currently scheduled for this date.
+    </h3>
+
+    <div class="row row-striped" th:each="booking: ${bookings}">
+        <div class="col-2 text-right">
+            <h1 class="display-4"><span class="badge badge-secondary"
+            th:text="${booking.displayDay}">dd</span></h1>
+            <h2 th:text="${booking.displayMonth}">MMM</h2>
+        </div>
+        <div class="col-10">
+            <h3 class="text-uppercase"><strong><span th:text="${booking.title}">title</span></strong></h3>
+            <ul class="list-inline">
+                <li class="list list-inline-item"><i class="fa fa-calender-o" aria-hidden="true"></i>
+                <span th:text="${booking.displayDayOfWeek}">xxxday</span></li>
+
+                <li class="list list-inline-item"><i class="fa fa-clock-o" aria-hidden="true"></i>
+                    <span th:text="|${booking.startTime} - ${booking.endTime}|">xxxday</span></li>
+
+                <li class="list list-inline-item"><i class="fa fa-location-arrow" aria-hidden="true"></i>
+                    <span th:text="${booking.room.name}">room</span></li>
+            </ul>
+
+        </div>
+
+    </div>
+
+
+</div>
+
+</body>
+</html>

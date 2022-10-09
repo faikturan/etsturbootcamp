@@ -1,10 +1,38 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/bootstrap::head">
 </head>
 <body>
+<div class="container">
+    <div th:replace="fragments/menu::top"></div>
+    <h1><span th:if="${user.id == null}">Add</span>
+        <span th:if="${user.id != null}">Edit</span> User</h1>
+
+        <div th:if="${#message}" class="bg-warning p-5"
+        th:text="|Something went wrong: ${#message} |" ></div>
+    <form th:object="${user}" th:action="@{/users/save}" method="post">
+        <input type="hidden" th:field="*{id}">
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" class="form-control" id="name"
+            placeholder="user name" th:field="*{name}">
+            <div class="alert alert-danger" th:if="${#fields.hasErrors('name')}"
+            th:errors="*{name}"></div>
+        </div>
+
+        <div class="form-group" th:if="${user.id == null}">
+            <label for="name">Password</label>
+            <input type="password" class="form-control" id="password"
+                   placeholder="password" th:field="*{password}">
+            <div class="alert alert-danger" th:if="${#fields.hasErrors('password')}"
+                 th:errors="*{password}"></div>
+        </div>
+        <input th:if="${user.id != null}" type="hidden" th:field="*{password}"></input>
+
+        <button type="submit" class="btn btn-primary">Save</button>
+    </form>
+
+</div>
 
 </body>
 </html>
